@@ -6,14 +6,14 @@ import {
 } from "react-router-dom";
 
 //Screens
-import { Timer } from './Timer';
+import { Clock } from './Clock';
 import { MealScheduler } from './MealScheduler';
 
 export const Landing = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Timer />} />
+        <Route path="/" element={<Clock />} />
         <Route path="/mealscheduler" elment={<MealScheduler />} />
       </Routes>
     </Router>
