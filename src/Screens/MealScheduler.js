@@ -8,6 +8,6 @@ export const MealScheduler = () => {
   )
 };
 
-const stlyes = {
+const styles = {
 
 };
