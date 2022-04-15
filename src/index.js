@@ -1,8 +1,10 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import React from 'react';
 
-const App = () => {
-  return <h1>LOL</h1>
-};
+//Subcomponents
+import { Landing } from './Screens/Landing';
 
-ReactDOM.render(<App />, document.getElementById("app"));
+const App = () => <Landing />;
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
