@@ -9,13 +9,25 @@ import {
 import { Clock } from './Clock';
 import { MealScheduler } from './MealScheduler';
 
+//Subcomponents
+import { MainContent } from '../PPC/MainContent';
+
+import { testData } from '../Defaults/TestData';
+
 export const Landing = () => {
+
+  //testing block
+  console.log("%c Testing Block", "color: orange")
+  console.log(testData.);
+
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Clock />} />
-        <Route path="/mealscheduler" elment={<MealScheduler />} />
-      </Routes>
+      <MainContent>
+        <Routes>
+          <Route path="/" element={<Clock />} />
+          <Route path="/mealscheduler" elment={<MealScheduler />} />
+        </Routes>
+      </MainContent>
     </Router>
   )
 };

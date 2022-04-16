@@ -18,12 +18,16 @@ export const Clock = () => {
   }, [currentTime])
 
   return (
-    <>
-    Current Time : {currentTime}
-    </>
+    <div style={styles.clock}>
+      Current Time : {currentTime}
+    </div>
   )
 };
 
 const styles = {
-
+  clock: {
+    color: 'white',
+    backgroundColor: 'purple',
+    fontWeight: 'bold'
+  }
 };
