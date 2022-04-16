@@ -11,14 +11,14 @@ import { MealScheduler } from './MealScheduler';
 
 //Subcomponents
 import { MainContent } from '../PPC/MainContent';
-
+import { APIModule } from '../APIModule/APIModule';
 import { testData } from '../Defaults/TestData';
 
 export const Landing = () => {
 
   //testing block
   console.log("%c Testing Block", "color: orange")
-  console.log(testData.);
+  console.log(APIModule.formatData(testData));
 
   return (
     <Router>
