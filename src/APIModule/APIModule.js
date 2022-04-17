@@ -5,34 +5,58 @@ import { DropDown } from '../Components/DropDown';
 import { testData } from '../Defaults/TestData';
 
 export const APIModule = {
-  formatData (JSON) {
+  formatData(JSON) {
     let formattedData = [];
     let encounteredIDs = [];
-    let strings = JSON.text.strings
+    let EnglishStrings = JSON.text.strings
     let values = JSON.searchFilters.category.values
 
-    function formatAPI (node) {
+    function formatAPI(node, parent = false) {
       //DropDown Container Condition
-      if (!encounteredIDs.includes(node.id) && node.hasOwnProperty('children')) {
+      if (!encounteredIDs.includes(node.id) 
+      // && node.hasOwnProperty('children')
+      && node.children.every(cv => typeof cv !== 'string')
+      ) {
 
-        let newDrawer = [];
-        node.children.forEach(cv => newDrawer.push(<div key={cv.id}>{values[cv.id]}</div>))
+        let newDrawer = [
+          ...node.children.map(cv => <div style={{backgroundColor: 'red'}}
+            key={cv.id}
+            >
+            {EnglishStrings[cv.id]}
+          </div>)
+        ];
 
-        let dropDownTemplate = <DropDown 
-        key={node.id}
-        header={strings[node.id]}
-        drawer={newDrawer}
+        let dropDownTemplate = <DropDown
+          key={node.id}
+          header={EnglishStrings[node.id]}
+          drawer={newDrawer}
         />
 
         formattedData.push(dropDownTemplate)
-        encounteredIDs.push(node.id)  
+        encounteredIDs.push(node.id)
 
-        node.children.forEach(cv =>formatAPI(cv))
-      //No DownContainer Condition
+        node.children.forEach(cv => formatAPI(cv))
+        //No DownContainer Condition
       } else {
+        
+        let newDrawer = [
+          ...node.children.map(cv => <div style={{backgroundColor: 'red'}}
+            key={cv}
+            >
+            {EnglishStrings[cv]}
+          </div>)
+        ];
+
+        let dropDownTemplate = <DropDown
+          key={node.id}
+          header={EnglishStrings[node.id]}
+          drawer={newDrawer}
+        />
+
+        formattedData.push(dropDownTemplate)
         encounteredIDs.push(node);
       }
-    } 
+    }
 
     formatAPI(values)
 

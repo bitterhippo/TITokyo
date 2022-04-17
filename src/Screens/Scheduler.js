@@ -3,6 +3,7 @@ import React from 'react';
 //Subcomponents
 import { APIModule } from '../APIModule/APIModule';
 import { testData } from '../Defaults/TestData';
+import { DropDown } from '../Components/DropDown';
 
 export const Scheduler = () => {
 
@@ -15,6 +16,8 @@ export const Scheduler = () => {
   return (
     <div>
       { hereWeGo }
+
+      {/* test */}
     </div>
   )
 };
