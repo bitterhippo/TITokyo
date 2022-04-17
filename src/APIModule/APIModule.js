@@ -8,7 +8,6 @@ export const APIModule = {
     let values = JSON.searchFilters.category.values
 
     function father (node) {
-      console.log(node)
       if (!encoutneredIds.includes(node.id) && node.hasOwnProperty('children')) {
         encoutneredIds.push(node.id)
 
