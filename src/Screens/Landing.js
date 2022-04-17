@@ -7,25 +7,20 @@ import {
 
 //Screens
 import { Clock } from './Clock';
-import { MealScheduler } from './MealScheduler';
+import { Scheduler } from './Scheduler';
 
 //Subcomponents
 import { MainContent } from '../PPC/MainContent';
-import { APIModule } from '../APIModule/APIModule';
-import { testData } from '../Defaults/TestData';
+
 
 export const Landing = () => {
-
-  //testing block
-  console.log("%c Testing Block", "color: orange")
-  console.log(APIModule.formatData(testData));
 
   return (
     <Router>
       <MainContent>
         <Routes>
-          <Route path="/" element={<Clock />} />
-          <Route path="/mealscheduler" elment={<MealScheduler />} />
+          <Route path="/" element={<Scheduler />} />
+          <Route path="/clock" element={<Clock />} />
         </Routes>
       </MainContent>
     </Router>

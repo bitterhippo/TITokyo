@@ -1,24 +1,41 @@
 import React from 'react';
 
+//Subcomponents
+import { DropDown } from '../Components/DropDown';
+import { testData } from '../Defaults/TestData';
+
 export const APIModule = {
   formatData (JSON) {
-    let formmattedData = [];
-    let encoutneredIds = [];
+    let formattedData = [];
+    let encounteredIDs = [];
     let strings = JSON.text.strings
     let values = JSON.searchFilters.category.values
 
-    function father (node) {
-      if (!encoutneredIds.includes(node.id) && node.hasOwnProperty('children')) {
-        encoutneredIds.push(node.id)
+    function formatAPI (node) {
+      //DropDown Container Condition
+      if (!encounteredIDs.includes(node.id) && node.hasOwnProperty('children')) {
 
-        node.children.forEach(cv =>father(cv))
+        let newDrawer = [];
+        node.children.forEach(cv => newDrawer.push(<div key={cv.id}>{values[cv.id]}</div>))
+
+        let dropDownTemplate = <DropDown 
+        key={node.id}
+        header={strings[node.id]}
+        drawer={newDrawer}
+        />
+
+        formattedData.push(dropDownTemplate)
+        encounteredIDs.push(node.id)  
+
+        node.children.forEach(cv =>formatAPI(cv))
+      //No DownContainer Condition
       } else {
-        encoutneredIds.push(node);
+        encounteredIDs.push(node);
       }
     } 
 
-    father(values)
+    formatAPI(values)
 
-    return encoutneredIds.map(currentId => strings[currentId]);
+    return formattedData;
   }
 };

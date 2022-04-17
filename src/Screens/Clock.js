@@ -4,6 +4,8 @@ export const Clock = () => {
 
   let initialTime = new Date().toLocaleTimeString();
 
+  //Clock logic
+
   const [currentTime, setCurrentTime] = useState(initialTime);
 
   useEffect(() => {
