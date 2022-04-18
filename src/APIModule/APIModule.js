@@ -39,10 +39,10 @@ export const APIModule = {
       />
 
       //Testing Case Block
-      console.log(`%c${EnglishStrings[node.id]}`, "color: red")
-      console.log(node)
-      console.log(objFilter)
-      console.log(stringFilter)
+      //console.log(`%c${EnglishStrings[node.id]}`, "color: red")
+      //console.log(node)
+      //console.log(objFilter)
+      //console.log(stringFilter)
 
       formattedData.push(templatedData);
       //Recursion
@@ -52,6 +52,21 @@ export const APIModule = {
     }
 
     formatAPI(values)
+
+    //final formatting
+    formattedData.reverse();
+
+    for (let i = 0; i < formattedData.length; i++) {
+      let searchKey = formattedData[i].key
+
+      for (let y = 0; y < formattedData.length; y++) {
+        if (formattedData[y].props.drawer.some(cv => cv.key === searchKey)) {
+          console.log(formattedData[y])
+          formattedData[y].props.drawer.push(formattedData[i].props.drawer)
+        }
+      }
+    }
+
 
     return formattedData;
   }
