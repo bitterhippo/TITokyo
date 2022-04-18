@@ -6,7 +6,6 @@ import { DropDown } from '../Components/DropDown';
 export const APIModule = {
   formatData(JSON) {
     let formattedData = [];
-    let encounteredIDs = [];
     let EnglishStrings = JSON.text.strings
     let values = JSON.searchFilters.category.values
 
@@ -27,9 +26,9 @@ export const APIModule = {
       ))
 
       stringFilter.forEach(cv => newDrawer.push(
-        <span key={cv}>
+        <div key={cv}>
           {EnglishStrings[cv]}
-        </span>
+        </div>
       ))
 
       let templatedData = <DropDown
@@ -68,8 +67,6 @@ export const APIModule = {
 
       Object.assign(formattedData[targetElement].props.drawer, newDrawer)
     }
-
-    console.log(formattedData)
 
     return formattedData[formattedData.length - 1];
   }

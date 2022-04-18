@@ -11,15 +11,17 @@ import { Scheduler } from './Scheduler';
 
 //Subcomponents
 import { MainContent } from '../PPC/MainContent';
+import { NavBar } from '../Components/NavBar';
 
 
 export const Landing = () => {
 
   return (
     <Router>
+      <NavBar />
       <MainContent>
         <Routes>
-          <Route path="/" element={<Scheduler />} />
+          <Route path="/scheduler" element={<Scheduler />} />
           <Route path="/clock" element={<Clock />} />
         </Routes>
       </MainContent>

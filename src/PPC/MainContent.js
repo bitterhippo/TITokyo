@@ -10,6 +10,7 @@ export const MainContent = ({ children }) => {
 
 const styles = {
   mainContentWrapper: {
+    marginTop: 150,
     margin: '0px 10%',
     textAlign: 'center',
   }
