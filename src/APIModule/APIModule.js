@@ -11,49 +11,43 @@ export const APIModule = {
     let values = JSON.searchFilters.category.values
 
     function formatAPI(node, parent = false) {
-      //DropDown Container Condition
-      if (!encounteredIDs.includes(node.id) 
-      // && node.hasOwnProperty('children')
-      && node.children.every(cv => typeof cv !== 'string')
-      ) {
+      //Bifurcate the children by type to facilitate the creation of formatting and determine what elements need to be recurrsively mapped.
+      let objFilter = node.children.filter(currentNode => typeof currentNode.children === 'object')
+      let stringFilter = node.children.filter(currentNode => typeof currentNode.children !== 'object')
 
-        let newDrawer = [
-          ...node.children.map(cv => <div style={{backgroundColor: 'red'}}
-            key={cv.id}
-            >
-            {EnglishStrings[cv.id]}
-          </div>)
-        ];
+      //Template Data
+      let newDrawer = [];
 
-        let dropDownTemplate = <DropDown
-          key={node.id}
-          header={EnglishStrings[node.id]}
-          drawer={newDrawer}
+      objFilter.forEach(cv => newDrawer.push(
+        <DropDown
+          key={cv.id}
+          header={EnglishStrings[cv.id]}
+          drawer={<>items</>}
         />
+      ))
 
-        formattedData.push(dropDownTemplate)
-        encounteredIDs.push(node.id)
+      stringFilter.forEach(cv => newDrawer.push(
+        <span key={cv}>
+          {EnglishStrings[cv]}
+        </span>
+      ))
 
-        node.children.forEach(cv => formatAPI(cv))
-        //No DownContainer Condition
-      } else {
-        
-        let newDrawer = [
-          ...node.children.map(cv => <div style={{backgroundColor: 'red'}}
-            key={cv}
-            >
-            {EnglishStrings[cv]}
-          </div>)
-        ];
+      let templatedData = <DropDown
+        key={node.id}
+        header={EnglishStrings[node.id]}
+        drawer={newDrawer}
+      />
 
-        let dropDownTemplate = <DropDown
-          key={node.id}
-          header={EnglishStrings[node.id]}
-          drawer={newDrawer}
-        />
+      //Testing Case Block
+      console.log(`%c${EnglishStrings[node.id]}`, "color: red")
+      console.log(node)
+      console.log(objFilter)
+      console.log(stringFilter)
 
-        formattedData.push(dropDownTemplate)
-        node.children.forEach(cv => encounteredIDs.push(cv));
+      formattedData.push(templatedData);
+      //Recursion
+      if (objFilter.length > 0) {
+        objFilter.forEach(cv => formatAPI(cv))
       }
     }
 
