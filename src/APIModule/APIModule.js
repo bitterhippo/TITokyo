@@ -2,7 +2,6 @@ import React from 'react';
 
 //Subcomponents
 import { DropDown } from '../Components/DropDown';
-import { testData } from '../Defaults/TestData';
 
 export const APIModule = {
   formatData(JSON) {
@@ -54,7 +53,7 @@ export const APIModule = {
         />
 
         formattedData.push(dropDownTemplate)
-        encounteredIDs.push(node);
+        node.children.forEach(cv => encounteredIDs.push(cv));
       }
     }
 
