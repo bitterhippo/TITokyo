@@ -9,7 +9,7 @@ export const Scheduler = () => {
 
   //testing block
   console.log("%c Testing Block", "color: orange")
-  console.log(APIModule.formatData(testData));
+  //console.log(APIModule.formatData(testData));
 
   let hereWeGo = APIModule.formatData(testData);
 

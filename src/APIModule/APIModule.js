@@ -22,7 +22,7 @@ export const APIModule = {
         <DropDown
           key={cv.id}
           header={EnglishStrings[cv.id]}
-          drawer={<>items</>}
+          drawer={''}
         />
       ))
 
@@ -56,18 +56,21 @@ export const APIModule = {
     //final formatting
     formattedData.reverse();
 
-    for (let i = 0; i < formattedData.length; i++) {
+    for (let i = 0; i < formattedData.length - 1; i++) {
+      //console.log(formattedData[i])
       let searchKey = formattedData[i].key
 
-      for (let y = 0; y < formattedData.length; y++) {
-        if (formattedData[y].props.drawer.some(cv => cv.key === searchKey)) {
-          console.log(formattedData[y])
-          formattedData[y].props.drawer.push(formattedData[i].props.drawer)
-        }
-      }
+      let targetElement = formattedData.map(cv => cv.props.drawer.some(cv => cv.key === searchKey)).indexOf(true)
+
+      let drawerRemainder = formattedData[targetElement].props.drawer.filter(cv => cv.key !== searchKey)
+
+      let newDrawer = [...drawerRemainder, formattedData[i]]
+
+      Object.assign(formattedData[targetElement].props.drawer, newDrawer)
     }
 
+    console.log(formattedData)
 
-    return formattedData;
+    return formattedData[formattedData.length - 1];
   }
 };
